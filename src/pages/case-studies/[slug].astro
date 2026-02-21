@@ -17,6 +17,14 @@ const { Content } = await render(entry);
 
 <BaseLayout title={`${entry.data.title} | Case Studies | KRUXD`} currentPath="/case-studies">
   <article class="section detail">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="crumb-sep" aria-hidden="true">/</span>
+      <a href="/case-studies">Case Studies</a>
+      <span class="crumb-sep" aria-hidden="true">/</span>
+      <span aria-current="page">{entry.data.title}</span>
+    </nav>
+
     <p class="meta">{entry.data.industry} · {entry.data.year} · {entry.data.category}</p>
     <h1>{entry.data.title}</h1>
     <p class="lead">{entry.data.summary}</p>

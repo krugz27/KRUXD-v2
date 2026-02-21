@@ -182,7 +182,7 @@ main,
 .brand-shield {
   position: absolute;
   left: 0;
-  top: -10px;
+  top: -6px;
   width: auto;
   height: 90px;
   object-fit: contain;
@@ -208,7 +208,7 @@ main,
   font-weight: 800;
   font-size: 62px;
   line-height: 1;
-  text-shadow: 1px 1px #d6b173;
+  text-shadow: 2px 2px #daa02e;
   padding: 0;
   border: 0;
   background: transparent;
@@ -305,14 +305,26 @@ main,
   direction: ltr;
 }
 
-.nav-links a.active,
 .nav-links a:hover,
-.footer-links a.active,
 .footer-links a:hover {
   color: #ffe6bd;
   border-color: #4c3527;
   background:
     linear-gradient(180deg, #4e3d2f 0%, #342821 58%, #231b17 100%);
+}
+
+.nav-links a.active,
+.footer-links a.active {
+  color: #ffefbe;
+  border-color: #6e4d2f;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(250, 210, 114, 0.3) 0%, rgba(250, 210, 114, 0.08) 40%, rgba(250, 210, 114, 0) 72%),
+    linear-gradient(180deg, #5c4737 0%, #3b2d24 56%, #261c17 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 230, 171, 0.35),
+    0 0 0 1px rgba(255, 216, 139, 0.22),
+    0 0 18px rgba(236, 185, 86, 0.4),
+    0 2px 0 rgba(15, 10, 8, 0.75);
 }
 
 main {
@@ -437,6 +449,33 @@ p {
   color: var(--ember);
 }
 
+.breadcrumbs {
+  margin: 0 0 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  color: #4a3628;
+  font-family: 'VT323', monospace;
+  font-size: 1.16rem;
+  letter-spacing: 0.03em;
+}
+
+.breadcrumbs a {
+  color: #6a2e16;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: #8d3f20;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.crumb-sep {
+  color: #7f6554;
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -493,12 +532,31 @@ p {
   image-rendering: pixelated;
 }
 
+.thumb-link {
+  display: block;
+  line-height: 0;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.thumb-link .thumb {
+  pointer-events: none;
+}
+
 .list-item .thumb {
   width: 150px;
   margin-bottom: 0;
   aspect-ratio: 4 / 3;
   grid-column: 1;
   grid-row: 1 / span 3;
+}
+
+.list-item .thumb-link {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  width: 150px;
 }
 
 .list-item .meta,
@@ -649,6 +707,7 @@ p {
   }
 
   .list-item .thumb,
+  .list-item .thumb-link,
   .list-item .meta,
   .list-item h3,
   .list-item p:not(.meta) {
@@ -660,5 +719,9 @@ p {
     width: 100%;
     margin-bottom: 0.2rem;
     aspect-ratio: 16 / 9;
+  }
+
+  .list-item .thumb-link {
+    width: 100%;
   }
 }

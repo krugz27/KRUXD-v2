@@ -39,13 +39,15 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
       {
         caseStudies.map((entry) => (
           <article class="card">
-            <img
-              class="thumb"
-              src={entry.data.thumbnail ?? '/images/placeholder-thumb.svg'}
-              alt={`${entry.data.title} thumbnail`}
-              loading="lazy"
-              decoding="async"
-            />
+            <a class="thumb-link" href={`/case-studies/${entry.slug}`} aria-label={`Open ${entry.data.title}`}>
+              <img
+                class="thumb"
+                src={entry.data.thumbnail ?? '/images/placeholder-thumb.svg'}
+                alt={`${entry.data.title} thumbnail`}
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <p class="meta">{entry.data.industry} · {entry.data.category}</p>
             <h3>
               <a class="card-link" href={`/case-studies/${entry.slug}`}>
@@ -68,13 +70,15 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
       {
         topMusings.map((entry) => (
           <article class="list-item home-musing-item">
-            <img
-              class="thumb"
-              src={entry.data.thumbnail ?? '/images/placeholder-thumb.svg'}
-              alt={`${entry.data.title} thumbnail`}
-              loading="lazy"
-              decoding="async"
-            />
+            <a class="thumb-link" href={`/musings/${entry.slug}`} aria-label={`Open ${entry.data.title}`}>
+              <img
+                class="thumb"
+                src={entry.data.thumbnail ?? '/images/placeholder-thumb.svg'}
+                alt={`${entry.data.title} thumbnail`}
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <p class="meta">{dateFormatter.format(entry.data.publishDate)} · {entry.data.topic}</p>
             <h3>
               <a class="list-link" href={`/musings/${entry.slug}`}>

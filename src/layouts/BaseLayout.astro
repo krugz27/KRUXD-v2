@@ -39,15 +39,15 @@ const isActive = (path: string) => currentPath === path;
             </a>
           </li>
           <li>
-            <a href="/about" class={isActive('/about') ? 'active' : ''}>
-              <span class="material-symbols-outlined nav-icon" aria-hidden="true">emoji_people</span>
-              <span>About Me</span>
-            </a>
-          </li>
-          <li>
             <a href="/musings" class={isActive('/musings') ? 'active' : ''}>
               <span class="material-symbols-outlined nav-icon" aria-hidden="true">cognition</span>
               <span>Musings</span>
+            </a>
+          </li>
+          <li>
+            <a href="/about" class={isActive('/about') ? 'active' : ''}>
+              <span class="material-symbols-outlined nav-icon" aria-hidden="true">emoji_people</span>
+              <span>About Me</span>
             </a>
           </li>
           <li>

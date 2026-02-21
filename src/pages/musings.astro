@@ -14,6 +14,12 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
 ---
 
 <BaseLayout title="Musings | KRUXD" currentPath="/musings">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="crumb-sep" aria-hidden="true">/</span>
+    <span aria-current="page">Musings</span>
+  </nav>
+
   <section class="hero compact">
     <p class="eyebrow">Writing</p>
     <h1>Musings</h1>
@@ -25,13 +31,15 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
       {
         musings.map((entry) => (
           <article class="list-item">
-            <img
-              class="thumb"
-              src={entry.data.thumbnail ?? '/images/placeholder-thumb.svg'}
-              alt={`${entry.data.title} thumbnail`}
-              loading="lazy"
-              decoding="async"
-            />
+            <a class="thumb-link" href={`/musings/${entry.slug}`} aria-label={`Open ${entry.data.title}`}>
+              <img
+                class="thumb"
+                src={entry.data.thumbnail ?? '/images/placeholder-thumb.svg'}
+                alt={`${entry.data.title} thumbnail`}
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <p class="meta">{dateFormatter.format(entry.data.publishDate)} · {entry.data.topic}</p>
             <h3>
               <a class="list-link" href={`/musings/${entry.slug}`}>
