@@ -4,6 +4,7 @@ year: 2025
 industry: SaaS Platform
 category: B2B
 summary: Reframed analytics hierarchy, reduced cognitive load, and increased daily active usage.
+thumbnail: /images/sample-stock-market.png
 featured: true
 ---
 I partnered with product and engineering leads to simplify a dense analytics surface into a clear decision-making workflow.

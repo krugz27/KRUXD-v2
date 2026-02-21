@@ -4,6 +4,7 @@ year: 2024
 industry: HealthTech
 category: Service Design
 summary: Mapped end-to-end service touchpoints to improve completion and reduce administrative overhead.
+thumbnail: /images/sample-wind-farm.png
 featured: true
 ---
 The intake journey spanned digital forms, staff handoffs, and in-person checkpoints.

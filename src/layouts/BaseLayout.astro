@@ -22,7 +22,10 @@ const isActive = (path: string) => currentPath === path;
     <header class="site-header">
       <a class="brand-wrap" href="/" aria-label="KRUXD Home">
         <img class="brand-shield" src="/images/KRUXD-Shield.png" alt="KRUXD shield" />
-        <span class="brand">KRUXD</span>
+        <span class="brand-lockup">
+          <span class="brand">KRUXD</span>
+          <span class="brand-subtitle">UX &amp; Product Design</span>
+        </span>
       </a>
       <nav>
         <ul class="nav-links">
@@ -75,6 +78,15 @@ const isActive = (path: string) => currentPath === path;
     <script>
       const BACKGROUND_ZOOM = 1.5;
       const PAN_SPEED = 0.18;
+      const HEADER_COMPACT_SCROLL_Y = 56;
+      let headerIsCompact = false;
+
+      const updateHeaderState = () => {
+        const shouldBeCompact = window.scrollY > HEADER_COMPACT_SCROLL_Y;
+        if (shouldBeCompact === headerIsCompact) return;
+        headerIsCompact = shouldBeCompact;
+        document.body.classList.toggle('header-compact', shouldBeCompact);
+      };
 
       const updateBackgroundPan = () => {
         const maxPan = Math.max(0, (BACKGROUND_ZOOM - 1) * window.innerWidth - 2);
@@ -83,7 +95,15 @@ const isActive = (path: string) => currentPath === path;
       };
 
       updateBackgroundPan();
-      window.addEventListener('scroll', updateBackgroundPan, { passive: true });
+      updateHeaderState();
+      window.addEventListener(
+        'scroll',
+        () => {
+          updateBackgroundPan();
+          updateHeaderState();
+        },
+        { passive: true }
+      );
       window.addEventListener('resize', updateBackgroundPan);
 
       const panoramaToggle = document.getElementById('panorama-toggle');

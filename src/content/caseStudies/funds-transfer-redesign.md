@@ -4,6 +4,7 @@ year: 2024
 industry: Mobile Banking
 category: Fintech
 summary: Introduced progressive disclosure that cut support tickets tied to transfer errors.
+thumbnail: /images/sample-gas-pump.png
 featured: true
 ---
 This project focused on reducing user mistakes in a high-risk transaction flow.
