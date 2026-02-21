@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const caseStudies = (await getCollection('caseStudies')).sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout title="Case Studies | KRUXD" currentPath="/case-studies">
+  <section class="hero compact">
+    <p class="eyebrow">Selected Work</p>
+    <h1>Case Studies</h1>
+    <p>Deep dives into the product challenges I’ve solved through UX strategy and execution.</p>
+  </section>
+
+  <section class="section">
+    <div class="card-grid">
+      {
+        caseStudies.map((entry) => (
+          <article class="card">
+            <img
+              class="thumb"
+              src={entry.data.thumbnail ?? '/images/placeholder-thumb.svg'}
+              alt={`${entry.data.title} thumbnail`}
+              loading="lazy"
+              decoding="async"
+            />
+            <p class="meta">{entry.data.industry} · {entry.data.year}</p>
+            <h3>
+              <a class="card-link" href={`/case-studies/${entry.slug}`}>
+                {entry.data.title}
+              </a>
+            </h3>
+            <p>{entry.data.summary}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

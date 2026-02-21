@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('caseStudies');
+
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`${entry.data.title} | Case Studies | KRUXD`} currentPath="/case-studies">
+  <article class="section detail">
+    <p class="meta">{entry.data.industry} · {entry.data.year} · {entry.data.category}</p>
+    <h1>{entry.data.title}</h1>
+    <p class="lead">{entry.data.summary}</p>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

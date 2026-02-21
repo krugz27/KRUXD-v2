@@ -1,0 +1,121 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  currentPath: string;
+}
+
+const { title, currentPath } = Astro.props;
+
+const isActive = (path: string) => currentPath === path;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body class="theme-vintage">
+    <header class="site-header">
+      <a class="brand-wrap" href="/" aria-label="KRUXD Home">
+        <img class="brand-shield" src="/images/KRUXD-Shield.png" alt="KRUXD shield" />
+        <span class="brand">KRUXD</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li>
+            <a href="/" class={isActive('/') ? 'active' : ''}>
+              <span class="material-symbols-outlined nav-icon" aria-hidden="true">home</span>
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>
+              <span class="material-symbols-outlined nav-icon" aria-hidden="true">book_2</span>
+              <span>Case Studies</span>
+            </a>
+          </li>
+          <li>
+            <a href="/about" class={isActive('/about') ? 'active' : ''}>
+              <span class="material-symbols-outlined nav-icon" aria-hidden="true">emoji_people</span>
+              <span>About Me</span>
+            </a>
+          </li>
+          <li>
+            <a href="/musings" class={isActive('/musings') ? 'active' : ''}>
+              <span class="material-symbols-outlined nav-icon" aria-hidden="true">cognition</span>
+              <span>Musings</span>
+            </a>
+          </li>
+          <li>
+            <button
+              id="panorama-toggle"
+              class="easter-btn"
+              type="button"
+              aria-label="Toggle panoramic mode easter egg"
+              title="Panoramic mode"
+            >
+              <span class="material-symbols-outlined nav-icon" aria-hidden="true">
+                relax
+              </span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+    <div class="panorama-bg" aria-hidden="true"></div>
+    <div id="panorama-overlay" class="panorama-overlay" aria-hidden="true"></div>
+    <script>
+      const BACKGROUND_ZOOM = 1.5;
+      const PAN_SPEED = 0.18;
+
+      const updateBackgroundPan = () => {
+        const maxPan = Math.max(0, (BACKGROUND_ZOOM - 1) * window.innerWidth - 2);
+        const pan = -Math.min(window.scrollY * PAN_SPEED, maxPan);
+        document.body.style.setProperty('--bg-pan-x', `${pan}px`);
+      };
+
+      updateBackgroundPan();
+      window.addEventListener('scroll', updateBackgroundPan, { passive: true });
+      window.addEventListener('resize', updateBackgroundPan);
+
+      const panoramaToggle = document.getElementById('panorama-toggle');
+      const panoramaOverlay = document.getElementById('panorama-overlay');
+
+      if (panoramaToggle && panoramaOverlay) {
+        const enterPanorama = () => {
+          document.body.classList.add('panoramic-mode');
+        };
+
+        const exitPanorama = () => {
+          document.body.classList.remove('panoramic-mode');
+        };
+
+        panoramaToggle.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          if (document.body.classList.contains('panoramic-mode')) {
+            exitPanorama();
+            return;
+          }
+          enterPanorama();
+        });
+
+        panoramaOverlay.addEventListener('click', () => {
+          exitPanorama();
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') exitPanorama();
+        });
+      }
+    </script>
+  </body>
+</html>

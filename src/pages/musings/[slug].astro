@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('musings');
+
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: '2-digit',
+  year: 'numeric'
+});
+---
+
+<BaseLayout title={`${entry.data.title} | Musings | KRUXD`} currentPath="/musings">
+  <article class="section detail">
+    <p class="meta">{dateFormatter.format(entry.data.publishDate)} · {entry.data.topic}</p>
+    <h1>{entry.data.title}</h1>
+    <p class="lead">{entry.data.summary}</p>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

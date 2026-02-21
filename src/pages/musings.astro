@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const musings = (await getCollection('musings')).sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: '2-digit',
+  year: 'numeric'
+});
+---
+
+<BaseLayout title="Musings | KRUXD" currentPath="/musings">
+  <section class="hero compact">
+    <p class="eyebrow">Writing</p>
+    <h1>Musings</h1>
+    <p>Reflections on UX practice, product design, and the craft behind meaningful experiences.</p>
+  </section>
+
+  <section class="section">
+    <div class="list-stack">
+      {
+        musings.map((entry) => (
+          <article class="list-item">
+            <img
+              class="thumb"
+              src={entry.data.thumbnail ?? '/images/placeholder-thumb.svg'}
+              alt={`${entry.data.title} thumbnail`}
+              loading="lazy"
+              decoding="async"
+            />
+            <p class="meta">{dateFormatter.format(entry.data.publishDate)} · {entry.data.topic}</p>
+            <h3>
+              <a class="list-link" href={`/musings/${entry.slug}`}>
+                {entry.data.title}
+              </a>
+            </h3>
+            <p>{entry.data.summary}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
