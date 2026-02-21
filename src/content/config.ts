@@ -25,7 +25,20 @@ const musings = defineCollection({
   })
 });
 
+const experiments = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    year: z.number().int(),
+    area: z.string(),
+    summary: z.string(),
+    thumbnail: z.string().optional(),
+    featured: z.boolean().default(false)
+  })
+});
+
 export const collections = {
   caseStudies,
-  musings
+  musings,
+  experiments
 };

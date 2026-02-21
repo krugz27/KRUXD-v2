@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('experiments');
+
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`${entry.data.title} | Experiments | KRUXD`} currentPath="/experiments">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="crumb-sep" aria-hidden="true">/</span>
+    <a href="/experiments">Experiments</a>
+    <span class="crumb-sep" aria-hidden="true">/</span>
+    <span aria-current="page">{entry.data.title}</span>
+  </nav>
+
+  <article class="section detail">
+    <p class="meta">{entry.data.area} · {entry.data.year}</p>
+    <h1>{entry.data.title}</h1>
+    <p class="lead">{entry.data.summary}</p>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

@@ -42,6 +42,12 @@ const isActive = (path: string) => currentPath === path;
             </a>
           </li>
           <li>
+            <a href="/experiments" class={isActive('/experiments') ? 'active' : ''}>
+              <span class="material-symbols-outlined nav-icon" aria-hidden="true">experiment</span>
+              <span>Experiments</span>
+            </a>
+          </li>
+          <li>
             <a href="/musings" class={isActive('/musings') ? 'active' : ''}>
               <span class="material-symbols-outlined nav-icon" aria-hidden="true">cognition</span>
               <span>Musings</span>
@@ -52,19 +58,6 @@ const isActive = (path: string) => currentPath === path;
               <span class="material-symbols-outlined nav-icon" aria-hidden="true">emoji_people</span>
               <span>About Me</span>
             </a>
-          </li>
-          <li>
-            <button
-              id="panorama-toggle"
-              class="easter-btn"
-              type="button"
-              aria-label="Toggle panoramic mode easter egg"
-              title="Panoramic mode"
-            >
-              <span class="material-symbols-outlined nav-icon" aria-hidden="true">
-                relax
-              </span>
-            </button>
           </li>
         </ul>
       </nav>

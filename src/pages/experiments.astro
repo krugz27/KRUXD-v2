@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const experiments = (await getCollection('experiments')).sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout title="Experiments | KRUXD" currentPath="/experiments">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="crumb-sep" aria-hidden="true">/</span>
+    <span aria-current="page">Experiments</span>
+  </nav>
+
+  <section class="hero compact">
+    <p class="eyebrow">Explorations</p>
+    <h1>Experiments</h1>
+    <p>Concepts, prototypes, and thought exercises used to test ideas before they become products.</p>
+  </section>
+
+  <section class="section">
+    <div class="card-grid">
+      {
+        experiments.map((entry) => (
+          <article class="card">
+            <a class="thumb-link" href={`/experiments/${entry.slug}`} aria-label={`Open ${entry.data.title}`}>
+              <img
+                class="thumb"
+                src={entry.data.thumbnail ?? '/images/placeholder-thumb.svg'}
+                alt={`${entry.data.title} thumbnail`}
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <p class="meta">{entry.data.area} · {entry.data.year}</p>
+            <h3>
+              <a class="card-link" href={`/experiments/${entry.slug}`}>
+                {entry.data.title}
+              </a>
+            </h3>
+            <p>{entry.data.summary}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
