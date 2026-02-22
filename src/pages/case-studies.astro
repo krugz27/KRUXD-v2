@@ -5,16 +5,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const caseStudies = (await getCollection('caseStudies')).sort((a, b) => b.data.year - a.data.year);
 ---
 
-<BaseLayout title="Case Studies | KRUXD" currentPath="/case-studies">
+<BaseLayout title="Work | KRUXD" currentPath="/case-studies">
   <nav class="breadcrumbs" aria-label="Breadcrumb">
     <a href="/">Home</a>
     <span class="crumb-sep" aria-hidden="true">/</span>
-    <span aria-current="page">Case Studies</span>
+    <span aria-current="page">Work</span>
   </nav>
 
   <section class="hero compact">
     <p class="eyebrow">Selected Work</p>
-    <h1>Case Studies</h1>
+    <h1>Work</h1>
     <p>Deep dives into the product challenges I’ve solved through UX strategy and execution.</p>
   </section>
 

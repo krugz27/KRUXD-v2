@@ -15,11 +15,11 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<BaseLayout title={`${entry.data.title} | Case Studies | KRUXD`} currentPath="/case-studies">
+<BaseLayout title={`${entry.data.title} | Work | KRUXD`} currentPath="/case-studies">
   <nav class="breadcrumbs" aria-label="Breadcrumb">
     <a href="/">Home</a>
     <span class="crumb-sep" aria-hidden="true">/</span>
-    <a href="/case-studies">Case Studies</a>
+    <a href="/case-studies">Work</a>
     <span class="crumb-sep" aria-hidden="true">/</span>
     <span aria-current="page">{entry.data.title}</span>
   </nav>
