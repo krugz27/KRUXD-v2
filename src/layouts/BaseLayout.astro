@@ -9,6 +9,13 @@ interface Props {
 const { title, currentPath } = Astro.props;
 
 const isActive = (path: string) => currentPath === path;
+const navItems = [
+  { href: '/', icon: 'home', label: 'Home' },
+  { href: '/case-studies', icon: 'book_2', label: 'Work' },
+  { href: '/experiments', icon: 'experiment', label: 'Experiments' },
+  { href: '/musings', icon: 'cognition', label: 'Musings' },
+  { href: '/about', icon: 'emoji_people', label: 'About Me' }
+];
 ---
 
 <!doctype html>
@@ -27,63 +34,99 @@ const isActive = (path: string) => currentPath === path;
           <span class="brand-subtitle">UX &amp; Product Design</span>
         </span>
       </a>
-      <nav>
-        <ul class="nav-links">
-          <li>
-            <a href="/" class={isActive('/') ? 'active' : ''}>
-              <span class="material-symbols-outlined nav-icon" aria-hidden="true">home</span>
-              <span>Home</span>
-            </a>
-          </li>
-          <li>
-            <a href="/case-studies" class={isActive('/case-studies') ? 'active' : ''}>
-              <span class="material-symbols-outlined nav-icon" aria-hidden="true">book_2</span>
-              <span>Work</span>
-            </a>
-          </li>
-          <li>
-            <a href="/experiments" class={isActive('/experiments') ? 'active' : ''}>
-              <span class="material-symbols-outlined nav-icon" aria-hidden="true">experiment</span>
-              <span>Experiments</span>
-            </a>
-          </li>
-          <li>
-            <a href="/musings" class={isActive('/musings') ? 'active' : ''}>
-              <span class="material-symbols-outlined nav-icon" aria-hidden="true">cognition</span>
-              <span>Musings</span>
-            </a>
-          </li>
-          <li>
-            <a href="/about" class={isActive('/about') ? 'active' : ''}>
-              <span class="material-symbols-outlined nav-icon" aria-hidden="true">emoji_people</span>
-              <span>About Me</span>
-            </a>
-          </li>
+      <nav class="primary-nav" aria-label="Primary">
+        <ul class="nav-links nav-inline">
+          {
+            navItems.map((item) => (
+              <li>
+                <a href={item.href} class={isActive(item.href) ? 'active' : ''}>
+                  <span class="material-symbols-outlined nav-icon" aria-hidden="true">{item.icon}</span>
+                  <span>{item.label}</span>
+                </a>
+              </li>
+            ))
+          }
         </ul>
+
+        <div class="nav-menu">
+          <button
+            id="nav-menu-trigger"
+            class="nav-menu-trigger"
+            type="button"
+            aria-expanded="false"
+            aria-haspopup="menu"
+            aria-controls="nav-menu-panel"
+            aria-label="Open navigation menu"
+          >
+            <span class="material-symbols-outlined nav-icon" aria-hidden="true">menu</span>
+            <span>Menu</span>
+          </button>
+          <div id="nav-menu-panel" class="nav-menu-panel" hidden>
+            <div class="nav-menu-head">
+              <span class="nav-menu-title">Menu</span>
+              <div
+                id="nav-menu-close"
+                class="nav-menu-close"
+                role="button"
+                tabindex="0"
+                aria-label="Close navigation menu"
+              >
+                <span class="material-symbols-outlined nav-icon" aria-hidden="true">close</span>
+              </div>
+            </div>
+            <ul class="nav-menu-list" role="menu">
+              {
+                navItems.map((item) => (
+                  <li>
+                    <a href={item.href} class={isActive(item.href) ? 'active' : ''} role="menuitem">
+                      <span class="material-symbols-outlined nav-icon" aria-hidden="true">{item.icon}</span>
+                      <span>{item.label}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
       </nav>
     </header>
 
     <main>
       <slot />
     </main>
+    <div class="scroll-bg-mobile" aria-hidden="true"></div>
     <div class="panorama-bg" aria-hidden="true"></div>
     <div id="panorama-overlay" class="panorama-overlay" aria-hidden="true"></div>
     <script>
       const BACKGROUND_ZOOM = 1.5;
       const PAN_SPEED = 0.18;
-      const HEADER_COMPACT_SCROLL_Y = 56;
+      const mobileScrollBg = document.querySelector('.scroll-bg-mobile');
       let headerIsCompact = false;
+      const getHeaderCompactThreshold = () => (window.innerWidth <= 760 ? 20 : 56);
 
       const updateHeaderState = () => {
-        const shouldBeCompact = window.scrollY > HEADER_COMPACT_SCROLL_Y;
+        const shouldBeCompact = window.scrollY > getHeaderCompactThreshold();
         if (shouldBeCompact === headerIsCompact) return;
         headerIsCompact = shouldBeCompact;
         document.body.classList.toggle('header-compact', shouldBeCompact);
       };
 
       const updateBackgroundPan = () => {
-        const maxPan = Math.max(0, (BACKGROUND_ZOOM - 1) * window.innerWidth - 2);
-        const pan = -Math.min(window.scrollY * PAN_SPEED, maxPan);
+        const isMobileViewport = window.innerWidth <= 760;
+        const effectiveSpeed = isMobileViewport ? 0.07 : PAN_SPEED;
+        const effectiveZoom = isMobileViewport ? 1.2 : BACKGROUND_ZOOM;
+        const fallbackTravel = Math.max(0, (effectiveZoom - 1) * window.innerWidth - 2);
+        const mobileLayerTravel =
+          isMobileViewport && mobileScrollBg instanceof HTMLElement
+            ? (() => {
+                const styles = window.getComputedStyle(mobileScrollBg);
+                const leftPx = Number.parseFloat(styles.left || '0') || 0;
+                const rightOverhang = mobileScrollBg.offsetWidth + leftPx - window.innerWidth;
+                return Math.max(0, rightOverhang);
+              })()
+            : null;
+        const maxPan = mobileLayerTravel ?? fallbackTravel;
+        const pan = -Math.min(window.scrollY * effectiveSpeed, maxPan);
         document.body.style.setProperty('--bg-pan-x', `${pan}px`);
       };
 
@@ -101,6 +144,82 @@ const isActive = (path: string) => currentPath === path;
 
       const panoramaToggle = document.getElementById('panorama-toggle');
       const panoramaOverlay = document.getElementById('panorama-overlay');
+      const navMenuTrigger = document.getElementById('nav-menu-trigger');
+      const navMenuPanel = document.getElementById('nav-menu-panel');
+      const navMenuClose = document.getElementById('nav-menu-close');
+      const mainElement = document.querySelector('main');
+
+      const closeNavMenu = () => {
+        if (!navMenuTrigger || !navMenuPanel) return;
+        navMenuPanel.hidden = true;
+        navMenuTrigger.setAttribute('aria-expanded', 'false');
+      };
+
+      const openNavMenu = () => {
+        if (!navMenuTrigger || !navMenuPanel) return;
+        navMenuPanel.hidden = false;
+        navMenuTrigger.setAttribute('aria-expanded', 'true');
+      };
+
+      if (navMenuTrigger && navMenuPanel) {
+        navMenuTrigger.addEventListener('click', () => {
+          const isOpen = navMenuTrigger.getAttribute('aria-expanded') === 'true';
+          if (isOpen) {
+            closeNavMenu();
+            return;
+          }
+          openNavMenu();
+        });
+
+        document.addEventListener('click', (event) => {
+          if (!(event.target instanceof Node)) return;
+          const clickedOutsideMenu =
+            !navMenuPanel.contains(event.target) && !navMenuTrigger.contains(event.target);
+          if (clickedOutsideMenu) closeNavMenu();
+        });
+
+        navMenuPanel.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            closeNavMenu();
+          });
+        });
+
+        navMenuClose?.addEventListener('click', () => {
+          closeNavMenu();
+        });
+
+        navMenuClose?.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            closeNavMenu();
+          }
+        });
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 1160) closeNavMenu();
+        });
+      }
+
+      if (mainElement) {
+        mainElement.addEventListener('click', (event) => {
+          if (!(event.target instanceof Element)) return;
+          if (event.target.closest('a, button, input, textarea, select, summary')) return;
+          const card = event.target.closest('.card, .list-item');
+          if (!card) return;
+          const primaryLink = card.querySelector('.thumb-link, .card-link, .list-link');
+          if (!(primaryLink instanceof HTMLAnchorElement)) return;
+          if (window.getSelection()?.toString()) return;
+          window.location.href = primaryLink.href;
+        });
+      }
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') return;
+        closeNavMenu();
+        if (document.body.classList.contains('panoramic-mode')) {
+          document.body.classList.remove('panoramic-mode');
+        }
+      });
 
       if (panoramaToggle && panoramaOverlay) {
         const enterPanorama = () => {
@@ -123,10 +242,6 @@ const isActive = (path: string) => currentPath === path;
 
         panoramaOverlay.addEventListener('click', () => {
           exitPanorama();
-        });
-
-        document.addEventListener('keydown', (event) => {
-          if (event.key === 'Escape') exitPanorama();
         });
       }
     </script>
