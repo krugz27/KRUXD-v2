@@ -27,13 +27,12 @@ body {
   font-family: 'Spectral', serif;
   --bg-pan-x: 0px;
   background:
-    linear-gradient(rgba(245, 239, 228, 0.48), rgba(245, 239, 228, 0.48)),
     url('/images/8-pixel-big-wide-warm.png'),
     linear-gradient(180deg, #3d3029 0%, #261e19 100%);
-  background-size: auto, 150%, auto;
-  background-position: center, calc(100% + var(--bg-pan-x)) bottom, center;
-  background-repeat: repeat, no-repeat, repeat;
-  background-attachment: scroll, fixed, scroll;
+  background-size: 150%, auto;
+  background-position: right var(--bg-pan-x) bottom, center;
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed, scroll;
 }
 
 .scroll-bg-mobile {
