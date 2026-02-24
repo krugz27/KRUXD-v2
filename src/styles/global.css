@@ -14,6 +14,10 @@
   --ember: #aa3d1b;
 }
 
+html {
+  background-color: #261e19;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -1098,8 +1102,8 @@ p {
   .scroll-bg-mobile {
     display: block;
     position: fixed;
-    top: 0;
-    bottom: 0;
+    top: -14vh;
+    bottom: -14vh;
     left: -24vw;
     width: 148vw;
     z-index: 0;
@@ -1186,6 +1190,8 @@ p {
   .scroll-bg-mobile {
     left: -30vw;
     width: 160vw;
+    top: -16vh;
+    bottom: -16vh;
   }
 }
 
