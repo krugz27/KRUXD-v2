@@ -1367,8 +1367,8 @@ body.lightbox-open {
   .hero-home .hero-copy h1::before,
   .hero-home .hero-copy h1::after {
     top: auto;
-    right: auto;
-    left: 1.2rem;
+    right: 1.2rem;
+    left: auto;
     bottom: 100%;
     transform: none;
   }
@@ -1379,9 +1379,10 @@ body.lightbox-open {
   }
 
   .hero-home .hero-copy h1::after {
-    left: 1.4rem;
+    right: 1.4rem;
+    left: auto;
     border-width: 0 10px 12px 10px;
-    border-color: transparent transparent rgba(230, 213, 181, 0.95) transparent;
+    border-color: transparent transparent rgba(220, 201, 166, 0.9) transparent;
   }
 
   .nav-links a,
