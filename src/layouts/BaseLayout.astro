@@ -166,6 +166,11 @@ const navItems = [
       const imageLightboxImg = document.getElementById('image-lightbox-img');
       const imageLightboxCaption = document.getElementById('image-lightbox-caption');
       const imageLightboxClose = document.getElementById('image-lightbox-close');
+      const heroPortrait = document.querySelector('.hero-portrait');
+      const desktopHoverMedia = window.matchMedia('(hover: hover) and (pointer: fine)');
+      const defaultPortraitSrc =
+        heroPortrait instanceof HTMLImageElement ? heroPortrait.getAttribute('src') : null;
+      const hoverPortraitSrc = '/images/8-bit-me-looking.png';
 
       const closeNavMenu = () => {
         if (!navMenuTrigger || !navMenuPanel) return;
@@ -252,6 +257,27 @@ const navItems = [
 
         window.addEventListener('resize', () => {
           if (window.innerWidth > 1160) closeNavMenu();
+        });
+      }
+
+      if (heroPortrait instanceof HTMLImageElement && defaultPortraitSrc) {
+        const navHoverTargets = Array.from(document.querySelectorAll('.nav-inline a'));
+        const setPortraitHoverState = (isHovered) => {
+          if (!desktopHoverMedia.matches || window.innerWidth <= 760) return;
+          heroPortrait.src = isHovered ? hoverPortraitSrc : defaultPortraitSrc;
+        };
+
+        navHoverTargets.forEach((link) => {
+          link.addEventListener('mouseenter', () => setPortraitHoverState(true));
+          link.addEventListener('mouseleave', () => setPortraitHoverState(false));
+          link.addEventListener('focus', () => setPortraitHoverState(true));
+          link.addEventListener('blur', () => setPortraitHoverState(false));
+        });
+
+        window.addEventListener('resize', () => {
+          if (!desktopHoverMedia.matches || window.innerWidth <= 760) {
+            heroPortrait.src = defaultPortraitSrc;
+          }
         });
       }
 
