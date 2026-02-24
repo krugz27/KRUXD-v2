@@ -22,6 +22,12 @@
         "thumbnail": {
           "type": "string"
         },
+        "gallery": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "featured": {
           "type": "boolean",
           "default": false

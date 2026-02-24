@@ -9,6 +9,7 @@ const caseStudies = defineCollection({
     category: z.string(),
     summary: z.string(),
     thumbnail: z.string().optional(),
+    gallery: z.array(z.string()).optional(),
     featured: z.boolean().default(false)
   })
 });

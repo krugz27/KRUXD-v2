@@ -28,8 +28,29 @@ const { Content } = await render(entry);
     <p class="meta">{entry.data.industry} · {entry.data.year} · {entry.data.category}</p>
     <h1>{entry.data.title}</h1>
     <p class="lead">{entry.data.summary}</p>
-    <div class="prose">
-      <Content />
+    <div class={`detail-body${entry.data.gallery && entry.data.gallery.length > 0 ? ' has-gallery' : ''}`}>
+      <div class="prose">
+        <Content />
+      </div>
+
+      {
+        entry.data.gallery && entry.data.gallery.length > 0 && (
+          <aside class="detail-gallery" aria-label="Case study gallery">
+            <p class="detail-gallery-title">Gallery</p>
+            <div class="detail-gallery-list">
+              {entry.data.gallery.map((imageSrc, index) => (
+                <button
+                  type="button"
+                  class="detail-gallery-thumb"
+                  aria-label={`Open gallery image ${index + 1} for ${entry.data.title}`}
+                >
+                  <img src={imageSrc} alt={`${entry.data.title} gallery image ${index + 1}`} loading="lazy" />
+                </button>
+              ))}
+            </div>
+          </aside>
+        )
+      }
     </div>
   </article>
 </BaseLayout>

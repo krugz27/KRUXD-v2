@@ -1,10 +1,10 @@
 ---
-title: Funds Transfer Redesign
-year: 2024
-industry: Mobile Banking
-category: Fintech
-summary: Introduced progressive disclosure that cut support tickets tied to transfer errors.
-thumbnail: /images/sample-gas-pump.png
+title: Eco Future (v2.0)
+year: 2025
+industry: SAAS
+category: Design Systems
+summary: A streamlined, modern design system built to scale across sector-specific products and accelerate development.
+thumbnail: /images/thumb-eco-v2.png
 featured: true
 ---
 This project focused on reducing user mistakes in a high-risk transaction flow.
