@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const caseStudies = (await getCollection('caseStudies'))
+const workEntries = (await getCollection('work'))
   .sort((a, b) => b.data.year - a.data.year)
   .filter((entry) => entry.data.featured)
   .slice(0, 3);
@@ -36,7 +36,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
     </div>
     <div class="card-grid">
       {
-        caseStudies.map((entry) => (
+        workEntries.map((entry) => (
           <article class="card">
             <a class="thumb-link" href={`/work/${entry.slug}`} aria-label={`Open ${entry.data.title}`}>
               <img
