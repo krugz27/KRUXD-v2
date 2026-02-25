@@ -1,7 +1,7 @@
 import { c as createComponent, r as renderComponent, a as renderTemplate, b as createAstro, m as maybeRenderHead, d as addAttribute } from '../chunks/astro/server_C-_fF5rL.mjs';
 import 'piccolore';
 import { $ as $$BaseLayout } from '../chunks/BaseLayout_Djj4_Cyu.mjs';
-import { n as normalizeWorkNextPath } from '../chunks/workAuth_D-VEulWh.mjs';
+import { n as normalizeWorkNextPath } from '../chunks/workAuth_h_DhOBKC.mjs';
 /* empty css                                      */
 export { renderers } from '../renderers.mjs';
 

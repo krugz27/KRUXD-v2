@@ -1,16 +1,20 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { Buffer } from 'node:buffer';
+import process from 'node:process';
 
 export const WORK_AUTH_COOKIE = 'kruxd_work_auth';
 
 const TOKEN_PREFIX = 'v1';
 const TOKEN_PAYLOAD = 'work-access';
 
+const readEnv = (key: 'WORK_SECTION_SECRET' | 'WORK_SECTION_PASSWORD') =>
+  import.meta.env[key] || process.env[key] || '';
+
 const getSecret = () => {
-  return import.meta.env.WORK_SECTION_SECRET || import.meta.env.WORK_SECTION_PASSWORD || '';
+  return readEnv('WORK_SECTION_SECRET') || readEnv('WORK_SECTION_PASSWORD');
 };
 
-export const getWorkPassword = () => import.meta.env.WORK_SECTION_PASSWORD || '';
+export const getWorkPassword = () => readEnv('WORK_SECTION_PASSWORD');
 
 const sign = (value: string, secret: string) =>
   createHmac('sha256', secret).update(value).digest('hex');
