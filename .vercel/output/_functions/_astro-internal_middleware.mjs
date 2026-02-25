@@ -16,9 +16,8 @@ const onRequest$1 = async (context, next) => {
   if (isValidWorkAuthToken(token)) {
     return next();
   }
-  const loginUrl = new URL("/work-login", url);
-  loginUrl.searchParams.set("next", normalizeWorkNextPath(`${url.pathname}${url.search}`));
-  return context.redirect(loginUrl.toString());
+  const nextPath = normalizeWorkNextPath(`${url.pathname}${url.search}`);
+  return context.redirect(`/work-login?next=${encodeURIComponent(nextPath)}`);
 };
 
 const onRequest = sequence(

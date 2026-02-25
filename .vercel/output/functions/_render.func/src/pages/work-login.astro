@@ -19,16 +19,16 @@ const hasMissingSecretConfigError = errorParam === 'missing-secret-config';
   </nav>
 
   <section class="hero compact">
-    <p class="eyebrow">Protected Work</p>
-    <h1>Enter Password</h1>
-    <p>Featured work summaries remain public. Full Work pages require a password.</p>
+    <p class="eyebrow">Portfolio Access</p>
+    <h1>Enter Access Password</h1>
+    <p>Some project details are shared privately. Enter the password to view full case studies.</p>
   </section>
 
   <section class="section detail">
     <form class="work-login-form" method="post" action="/api/work-auth/login">
       <input type="hidden" name="next" value={nextPath} />
 
-      <label class="work-login-label" for="work-password">Work Password</label>
+      <label class="work-login-label" for="work-password">Access password</label>
       <input
         id="work-password"
         class="work-login-input"
@@ -41,7 +41,7 @@ const hasMissingSecretConfigError = errorParam === 'missing-secret-config';
       {
         hasIncorrectPasswordError && (
           <p class="work-login-error" role="alert">
-            Incorrect password. Try again.
+            That password didn&apos;t work. Please try again.
           </p>
         )
       }
@@ -61,8 +61,8 @@ const hasMissingSecretConfigError = errorParam === 'missing-secret-config';
       }
 
       <div class="work-login-actions">
-        <button type="submit" class="work-login-submit">Unlock Work</button>
-        <a href="/" class="work-login-cancel">Back Home</a>
+        <button type="submit" class="work-login-submit">View Case Studies</button>
+        <a href="/" class="work-login-cancel">Return to Home</a>
       </div>
     </form>
   </section>
