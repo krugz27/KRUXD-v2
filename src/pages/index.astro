@@ -26,22 +26,19 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
       <p>
         With over 20 years of experience spanning design, strategy, and leadership, I help teams build products that hold up at scale. I've led global teams, bridged design and engineering, and mentored designers at every level, always thinking beyond flows and features to the systems and decisions that shape how a product evolves.
       </p>
-      <p>
-       I care about craft, but I care more about coherence. The goal isn't just to ship something good, it's to raise the quality bar in a way that lasts
-      </p>
     </div>
   </section>
 
   <section class="section">
     <div class="section-head">
       <h2>Featured Work</h2>
-      <a href="/case-studies">View all</a>
+      <a href="/work">View all</a>
     </div>
     <div class="card-grid">
       {
         caseStudies.map((entry) => (
           <article class="card">
-            <a class="thumb-link" href={`/case-studies/${entry.slug}`} aria-label={`Open ${entry.data.title}`}>
+            <a class="thumb-link" href={`/work/${entry.slug}`} aria-label={`Open ${entry.data.title}`}>
               <img
                 class="thumb"
                 src={entry.data.thumbnail ?? '/images/placeholder-thumb.svg'}
@@ -52,7 +49,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
             </a>
             <p class="meta">{entry.data.industry} · {entry.data.category}</p>
             <h3>
-              <a class="card-link" href={`/case-studies/${entry.slug}`}>
+              <a class="card-link" href={`/work/${entry.slug}`}>
                 {entry.data.title}
               </a>
             </h3>

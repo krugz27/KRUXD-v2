@@ -31,7 +31,7 @@ body {
   font-family: 'Spectral', serif;
   --bg-pan-x: 0px;
   background:
-    url('/images/8-bit-bg-wide-warm.png'),
+    url('/images/site-bg-1.png'),
     linear-gradient(180deg, #3d3029 0%, #261e19 100%);
   background-size: 150%, auto;
   background-position: right var(--bg-pan-x) bottom, center;
@@ -49,7 +49,7 @@ body {
   pointer-events: none;
   opacity: 0;
   z-index: 1100;
-  background-image: url('/images/8-bit-bg-wide-warm.png');
+  background-image: url('/images/site-bg-1.png');
   background-size: cover;
   background-position: left bottom;
   background-repeat: no-repeat;
@@ -1367,7 +1367,7 @@ body.lightbox-open {
   .hero-home .hero-copy h1::before,
   .hero-home .hero-copy h1::after {
     top: auto;
-    right: 1.2rem;
+    right: 20%;
     left: auto;
     bottom: 100%;
     transform: none;
@@ -1379,7 +1379,7 @@ body.lightbox-open {
   }
 
   .hero-home .hero-copy h1::after {
-    right: 1.4rem;
+    right: calc(20% + 0.2rem);
     left: auto;
     border-width: 0 10px 12px 10px;
     border-color: transparent transparent rgba(220, 201, 166, 0.9) transparent;
@@ -1426,7 +1426,7 @@ body.lightbox-open {
     width: 148vw;
     z-index: 0;
     pointer-events: none;
-    background-image: url('/images/8-bit-bg-wide-warm.png');
+    background-image: url('/images/site-bg-1.png');
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: cover;

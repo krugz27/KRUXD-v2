@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const caseStudies = (await getCollection('caseStudies')).sort((a, b) => b.data.year - a.data.year);
 ---
 
-<BaseLayout title="Work | KRUXD" currentPath="/case-studies">
+<BaseLayout title="Work | KRUXD" currentPath="/work">
   <nav class="breadcrumbs" aria-label="Breadcrumb">
     <a href="/">Home</a>
     <span class="crumb-sep" aria-hidden="true">/</span>
@@ -23,7 +23,7 @@ const caseStudies = (await getCollection('caseStudies')).sort((a, b) => b.data.y
       {
         caseStudies.map((entry) => (
           <article class="card">
-            <a class="thumb-link" href={`/case-studies/${entry.slug}`} aria-label={`Open ${entry.data.title}`}>
+            <a class="thumb-link" href={`/work/${entry.slug}`} aria-label={`Open ${entry.data.title}`}>
               <img
                 class="thumb"
                 src={entry.data.thumbnail ?? '/images/placeholder-thumb.svg'}
@@ -34,7 +34,7 @@ const caseStudies = (await getCollection('caseStudies')).sort((a, b) => b.data.y
             </a>
             <p class="meta">{entry.data.industry} · {entry.data.year}</p>
             <h3>
-              <a class="card-link" href={`/case-studies/${entry.slug}`}>
+              <a class="card-link" href={`/work/${entry.slug}`}>
                 {entry.data.title}
               </a>
             </h3>
