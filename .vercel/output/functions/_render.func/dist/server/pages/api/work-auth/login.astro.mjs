@@ -1,4 +1,4 @@
-import { n as normalizeWorkNextPath, g as getWorkPassword, c as createWorkAuthToken, W as WORK_AUTH_COOKIE } from '../../../chunks/workAuth_h_DhOBKC.mjs';
+import { n as normalizeWorkNextPath, g as getWorkPassword, c as createWorkAuthToken, W as WORK_AUTH_COOKIE, a as getWorkAuthCookieOptions } from '../../../chunks/workAuth_DEzwTCD5.mjs';
 export { renderers } from '../../../renderers.mjs';
 
 const prerender = false;
@@ -23,13 +23,7 @@ const POST = async ({ request, cookies, redirect }) => {
   if (!token) {
     return makeErrorRedirect("missing-secret-config");
   }
-  cookies.set(WORK_AUTH_COOKIE, token, {
-    path: "/",
-    httpOnly: true,
-    sameSite: "lax",
-    secure: true,
-    maxAge: 60 * 60 * 8
-  });
+  cookies.set(WORK_AUTH_COOKIE, token, getWorkAuthCookieOptions());
   return redirect(nextPath, 302);
 };
 

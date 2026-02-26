@@ -9,6 +9,7 @@ const errorParam = Astro.url.searchParams.get('error');
 const hasIncorrectPasswordError = errorParam === 'incorrect';
 const hasMissingPasswordConfigError = errorParam === 'missing-password-config';
 const hasMissingSecretConfigError = errorParam === 'missing-secret-config';
+const isLocalDev = import.meta.env.DEV;
 ---
 
 <BaseLayout title="Work Access | KRUXD" currentPath="/work">
@@ -65,6 +66,15 @@ const hasMissingSecretConfigError = errorParam === 'missing-secret-config';
         <a href="/" class="work-login-cancel">Return to Home</a>
       </div>
     </form>
+
+    {
+      isLocalDev && (
+        <form class="work-login-bypass-form" method="post" action="/api/work-auth/dev-bypass">
+          <input type="hidden" name="next" value={nextPath} />
+          <button type="submit" class="work-login-cancel">Bypass Password (Local)</button>
+        </form>
+      )
+    }
   </section>
 </BaseLayout>
 
@@ -110,6 +120,10 @@ const hasMissingSecretConfigError = errorParam === 'missing-secret-config';
     flex-wrap: wrap;
     gap: 0.65rem;
     align-items: center;
+  }
+
+  .work-login-bypass-form {
+    margin-top: 0.6rem;
   }
 
   .work-login-submit,

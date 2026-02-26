@@ -1,4 +1,4 @@
-import { W as WORK_AUTH_COOKIE, i as isValidWorkAuthToken, n as normalizeWorkNextPath } from './chunks/workAuth_h_DhOBKC.mjs';
+import { W as WORK_AUTH_COOKIE, i as isValidWorkAuthToken, n as normalizeWorkNextPath } from './chunks/workAuth_DEzwTCD5.mjs';
 import 'es-module-lexer';
 import './chunks/astro-designed-error-pages_CIerKPBV.mjs';
 import 'piccolore';

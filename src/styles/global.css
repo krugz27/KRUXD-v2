@@ -209,7 +209,7 @@ main,
 
 .brand-shield {
   position: absolute;
-  left: 0;
+  left: -11px;
   top: -6px;
   width: auto;
   height: 110px;
@@ -1049,6 +1049,15 @@ p {
     width: min(100%, 300px);
     justify-self: end;
   }
+
+  /* Support left-aligned media blocks where the media column is authored first. */
+  .prose .cs-split > .cs-split-media:first-child {
+    justify-self: start;
+  }
+
+  .prose .cs-split:has(> .cs-split-media:first-child) {
+    grid-template-columns: minmax(220px, 1fr) minmax(0, 84ch);
+  }
 }
 
 .detail-gallery {
@@ -1087,6 +1096,9 @@ p {
   aspect-ratio: 4 / 3;
   object-fit: cover;
   image-rendering: auto;
+  margin: 0;
+  border: 0;
+  box-shadow: none;
 }
 
 .detail-gallery-thumb:hover {
@@ -1094,6 +1106,46 @@ p {
     inset 0 0 0 1px rgba(255, 232, 190, 0.8),
     inset 0 0 0 3px rgba(90, 63, 43, 0.24),
     0 3px 0 rgba(0, 0, 0, 0.35);
+}
+
+.masonry-gallery {
+  column-count: 2;
+  column-gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.masonry-gallery .masonry-item {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  display: block;
+  margin: 0 0 0.75rem;
+}
+
+.masonry-gallery .detail-gallery-thumb {
+  width: 100%;
+}
+
+.masonry-gallery .detail-gallery-thumb img {
+  aspect-ratio: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.masonry-gallery .cs-split-caption {
+  margin: 0.35rem 0 0;
+}
+
+@media (min-width: 1280px) {
+  .masonry-gallery {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 760px) {
+  .masonry-gallery {
+    column-count: 1;
+    column-gap: 0;
+  }
 }
 
 @media (min-width: 980px) {

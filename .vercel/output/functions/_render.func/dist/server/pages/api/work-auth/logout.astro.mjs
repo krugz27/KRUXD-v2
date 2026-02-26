@@ -1,4 +1,4 @@
-import { W as WORK_AUTH_COOKIE } from '../../../chunks/workAuth_h_DhOBKC.mjs';
+import { W as WORK_AUTH_COOKIE } from '../../../chunks/workAuth_DEzwTCD5.mjs';
 export { renderers } from '../../../renderers.mjs';
 
 const prerender = false;

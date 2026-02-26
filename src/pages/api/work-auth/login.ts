@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import {
   createWorkAuthToken,
   getWorkPassword,
+  getWorkAuthCookieOptions,
   normalizeWorkNextPath,
   WORK_AUTH_COOKIE
 } from '../../../lib/workAuth';
@@ -33,13 +34,7 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
     return makeErrorRedirect('missing-secret-config');
   }
 
-  cookies.set(WORK_AUTH_COOKIE, token, {
-    path: '/',
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: import.meta.env.PROD,
-    maxAge: 60 * 60 * 8
-  });
+  cookies.set(WORK_AUTH_COOKIE, token, getWorkAuthCookieOptions());
 
   return redirect(nextPath, 302);
 };
