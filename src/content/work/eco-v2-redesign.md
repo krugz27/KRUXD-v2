@@ -186,3 +186,29 @@ Eco v2 is not just a visual update but a UX-led redesign, built in partnership w
 - Balanced speed, maintainability, and governance to ensure long-term scalability.
 
 Eco v2 now serves as a foundation that improves delivery velocity, lowers technical debt, and aligns design and development within a shared system.
+
+## Gallery
+
+<div class="masonry-gallery">
+  <div class="masonry-item">
+    <button type="button" class="detail-gallery-thumb">
+      <img src="/images/placeholder-thumb.svg" alt="Placeholder: Eco v2 gallery image 1" />
+    </button>
+    <p class="cs-split-caption"><em>Placeholder gallery image for Eco v2.</em></p>
+  </div>
+  <div class="masonry-item">
+    <button type="button" class="detail-gallery-thumb">
+      <img src="/images/placeholder-thumb.svg" alt="Placeholder: Eco v2 gallery image 2" />
+    </button>
+  </div>
+  <div class="masonry-item">
+    <button type="button" class="detail-gallery-thumb">
+      <img src="/images/placeholder-thumb.svg" alt="Placeholder: Eco v2 gallery image 3" />
+    </button>
+  </div>
+  <div class="masonry-item">
+    <button type="button" class="detail-gallery-thumb">
+      <img src="/images/placeholder-thumb.svg" alt="Placeholder: Eco v2 gallery image 4" />
+    </button>
+  </div>
+</div>

@@ -218,6 +218,36 @@ _Placeholder for a full-width approval workflow management visual._
 
 _Placeholder for a full-width audit log visual._
 
+## Gallery
+
+<div class="masonry-gallery">
+  <div class="masonry-item">
+    <button type="button" class="detail-gallery-thumb">
+      <img src="/images/work/FIH-image 12.png" alt="Fuel Hub gallery image 1" />
+    </button>
+  </div>
+  <div class="masonry-item">
+    <button type="button" class="detail-gallery-thumb">
+      <img src="/images/work/FIH-image 17.png" alt="Fuel Hub gallery image 2" />
+    </button>
+  </div>
+  <div class="masonry-item">
+    <button type="button" class="detail-gallery-thumb">
+      <img src="/images/work/FIH-image 24.png" alt="Fuel Hub gallery image 3" />
+    </button>
+  </div>
+  <div class="masonry-item">
+    <button type="button" class="detail-gallery-thumb">
+      <img src="/images/work/FIH-image 33.png" alt="Fuel Hub gallery image 4" />
+    </button>
+  </div>
+  <div class="masonry-item">
+    <button type="button" class="detail-gallery-thumb">
+      <img src="/images/work/FIH-image 40.png" alt="Fuel Hub gallery image 5" />
+    </button>
+  </div>
+</div>
+
 ![Placeholder: Audit Log image 2](/images/placeholder-thumb.svg)
 
 _Placeholder for a full-width audit log visual._
